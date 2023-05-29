@@ -60,7 +60,7 @@ development:
 test:
   <<: *default
   database: recipes_db
-  username: postgres
+  username: recipes_db
   password: 1215ehc
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -86,5 +86,5 @@ test:
 production:
   <<: *default
   database: recipes_db
-  username: postgres
-  password: 1215ehc
+  username: recipes_db
+  password: <%= ENV["RAILS_RECIPES_DATABASE_PASSWORD"] %>
