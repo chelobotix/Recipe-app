@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: recipes
+  database: recipes_db
   username: postgres
   password: 1215ehc
 
@@ -59,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: recipes
+  database: recipes_db
   username: postgres
   password: 1215ehc
 
@@ -85,6 +85,6 @@ test:
 #
 production:
   <<: *default
-  database: recipes
+  database: recipes_db
   username: postgres
   password: 1215ehc
