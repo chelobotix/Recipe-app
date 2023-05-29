@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: recipes
+  database: recipes_db
   username: postgres
   password: 1215ehc
 
@@ -59,8 +59,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: recipes
-  username: postgres
+  database: recipes_db
+  username: recipes_db
   password: 1215ehc
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -85,6 +85,6 @@ test:
 #
 production:
   <<: *default
-  database: recipes
-  username: postgres
-  password: 1215ehc
+  database: recipes_db
+  username: recipes_db
+  password: <%= ENV["RAILS_RECIPES_DATABASE_PASSWORD"] %>
