@@ -1,14 +1,32 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Foods</h1>
-
-<div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-    <p>
-      <%= link_to "Show this food", food %>
-    </p>
-  <% end %>
+<div class="flex flex-col items-center mt-10">
+  <%= link_to "New food", new_food_path, class: "self-end mr-10 py-2 px-3 bg-blue-500 rounded-lg font-bold text-white" %>
+  <table class="w-3/4 border-collapse">
+    <thead>
+      <tr class="bg-gray-300">
+        <th class="p-4 text-left">Food</th>
+        <th class="p-4 text-left">Measurement Unit</th>
+        <th class="p-4 text-left">Unit Price</th>
+        <th class="p-4 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @foods.present? %>
+        <% @foods.each do |food| %>
+          <tr class="border border-2 ">
+            <td class="p-4"><%= food.name%></td>
+            <td class="p-4"><%= food.measurement_unit%></td>
+            <td class="p-4"><%= food.price%></td>
+            <td class="p-4">
+              <%= button_to "delete", food_path(food.id), data: { :confirm => "Are you sure?"}, :method => :delete, class: "underline" %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="p-4 text-center">No Food Found</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New food", new_food_path %>
