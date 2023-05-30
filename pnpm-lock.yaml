@@ -6,16 +6,16 @@ settings:
 
 devDependencies:
   stylelint:
-    specifier: 13.x
+    specifier: ~13.0.0
     version: 13.0.0
   stylelint-config-standard:
-    specifier: 21.x
+    specifier: ~21.0.0
     version: 21.0.0(stylelint@13.0.0)
   stylelint-csstree-validator:
-    specifier: 1.x
+    specifier: ~1.0.0
     version: 1.0.0
   stylelint-scss:
-    specifier: 3.x
+    specifier: ~3.0.0
     version: 3.0.0(stylelint@13.0.0)
 
 packages:
