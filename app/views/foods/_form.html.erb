@@ -1,6 +1,9 @@
 <%= form_with(model: food) do |form| %>
+
+  <%= form.hidden_field :recipe_id, value: @recipe_id %>
+
   <% if food.errors.any? %>
-    <div style="color: red">
+    <div class="bg-red-400 text-white text-center text-sm mb-10 rounded-md">
       <h2><%= pluralize(food.errors.count, "error") %> prohibited this food from being saved:</h2>
 
       <ul>
@@ -10,8 +13,29 @@
       </ul>
     </div>
   <% end %>
+<div class=" rounded flex flex-col gap-4 p-4 w-[500px] h-full shadow-md justyify-center items-center bg-slate-200">
+  <div class="w-full">
+    <%= form.label :name, class: "w-full flex flex-col" %>
+    <%= form.text_field :name, class: "w-full" %>
+  </div>
 
-  <div>
+   <div class="w-full">
+    <%= form.label :measurement_unit, class: "w-full flex flex-col" %>
+    <%= form.text_field :measurement_unit, class: "w-full"%>
+  </div>
+
+  <div class="w-full">
+    <%= form.label :price, class: "w-full flex flex-col" %>
+    <%= form.text_field :price, class: "w-full" %>
+  </div>
+
+  <div class="w-full">
+    <%= form.label :quantity, class: "w-full flex flex-col" %>
+    <%= form.number_field :quantity, class: "w-full" %>
+  </div>
+
+  <div class="bg-[#13b8a6] w-[30%] rounded-md py-2 px-4 text-white font-semibold">
     <%= form.submit %>
+  </div>
   </div>
 <% end %>
