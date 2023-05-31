@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show destroy new_ingredient add_ingredient]
+  before_action :set_recipe, only: %i[show destroy new_ingredient add_ingredient edit_ingredient update_ingredient destroy_ingredient]
 
   # GET /recipes or /recipes.json
   def index
@@ -49,18 +49,40 @@ class RecipesController < ApplicationController
     end
   end
 
-  # DELETE /recipes/1 or /recipes/1.json
+  # GET /recipes/1/recipe_edit_ingredient
+  def edit_ingredient
+    @recipe_food = RecipeFood.new()
+  end
+
+  # PUT /recipes/1/update_ingredient
+  def update_ingredient
+    if @recipe.recipe_foods.update(ingredient_params_update)
+      redirect_to recipe_path(id: @recipe), notice: 'Ingredient was successfully updated.'
+    else
+      format.html { render :new, status: :unprocessable_entity }
+    end
+  end
+
+  # DELETE /recipes/1/delete_ingredient
+  def destroy_ingredient
+    if @recipe.recipe_foods[params[:index].to_i].destroy
+      redirect_to recipe_path(id: @recipe), notice: 'Ingredient was successfully deleted.'
+    else
+      format.html { render :new, status: :unprocessable_entity }
+    end
+
+  end
+
+  # DELETE /recipes/1
   def destroy
     @recipe.destroy
 
     respond_to do |format|
-      format.html { redirect_to recipes_path, notice: "Recipe was successfully destroyed." }
+      format.html { redirect_to recipes_path, notice: "Recipe was successfully deleted." }
     end
   end
 
   private
-
-
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
@@ -73,8 +95,11 @@ class RecipesController < ApplicationController
 
     def ingredient_params
       food_id = params[:recipe_food][:food_select].to_s.split("-").first.rstrip.to_i
-      puts food_id
       recipe_id = params[:id]
-      params.require(:recipe_food).permit(:quantity).merge(food_id: food_id).merge(recipe_id: 3)
+      params.require(:recipe_food).permit(:quantity).merge(food_id: food_id).merge(recipe_id: params[:id])
+    end
+
+    def ingredient_params_update
+      params.require(:recipe_food).permit(:quantity, :food_id).merge(recipe_id: params[:id])
     end
 end

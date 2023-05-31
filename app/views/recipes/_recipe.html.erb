@@ -23,11 +23,14 @@
             <hr>
 
             <div class="ingredients_container">
-                <% recipe.foods.each do |food| %>
+                <% recipe.foods.each_with_index do |food, index| %>
                   <p><%= food.name %></p>
                   <p><%= "#{pluralize(recipe.recipe_ingredient_quantity(food.id), food.measurement_unit)}" %></p>
-                  <%= link_to "Modify", method: :put, class: "my_class" %>
-                  <%= link_to "Remove", method: :delete, class: "my_class" %>
+                  <%= link_to "Modify",
+                    recipe_edit_ingredient_path(:edit_params => {:food_name => food.name, :food_id => food.id, :quantity => recipe.recipe_ingredient_quantity(food.id)}),
+                    method: :put,
+                    class: "my_class" %>
+                  <%= button_to "Remove", recipes_delete_ingredient_path(:food_id => food.id, :index => index), method: :delete, class: "my_class" %>
                 <% end %>
             </div>
         </div>
