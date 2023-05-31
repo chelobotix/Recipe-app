@@ -13,29 +13,35 @@
       </ul>
     </div>
   <% end %>
-<div class=" rounded flex flex-col gap-4 p-4 w-[500px] h-full shadow-md justyify-center items-center bg-slate-200">
-  <div class="w-full">
-    <%= form.label :name, class: "w-full flex flex-col" %>
-    <%= form.text_field :name, class: "w-full" %>
-  </div>
 
-   <div class="w-full">
-    <%= form.label :measurement_unit, class: "w-full flex flex-col" %>
-    <%= form.text_field :measurement_unit, class: "w-full"%>
-  </div>
+<!-- component -->
+    <div class="py-8 ml-10">
+      <h1 class="text-2xl font-bold mb-6 text-center">Registration Form</h1>
+      <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
 
-  <div class="w-full">
-    <%= form.label :price, class: "w-full flex flex-col" %>
-    <%= form.text_field :price, class: "w-full" %>
-  </div>
+        <div class="mb-4">
+          <%= form.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+        </div>
 
-  <div class="w-full">
-    <%= form.label :quantity, class: "w-full flex flex-col" %>
-    <%= form.number_field :quantity, class: "w-full" %>
-  </div>
+        <div class="mb-4">
+          <%= form.label :measurement_unit, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.text_field :measurement_unit, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"%>
+        </div>
 
-  <div class="bg-[#13b8a6] w-[30%] rounded-md py-2 px-4 text-white font-semibold">
-    <%= form.submit %>
-  </div>
-  </div>
+        <div class="mb-4">
+          <%= form.label :price, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.text_field :price, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+        </div>
+
+        <div class="mb-4">
+          <%= form.label :quantity, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= form.number_field :quantity, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+        </div>
+
+        <button class="btn-primary">
+          <%= form.submit %>
+        </button>
+      </form>
+    </div>
 <% end %>
