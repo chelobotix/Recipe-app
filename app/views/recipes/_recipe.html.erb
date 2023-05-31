@@ -20,7 +20,18 @@
             <div class="flex flex-col gap-2 mt-5">
                 <div class="flex justify-between">
                     <p><strong>Preparation Time: </strong><%= pluralize(recipe.preparation_time, 'hour') %></p>
-                    <button>Public toggle</button>
+
+                    <div>
+                        <p class="text-center font-bold text-lg mb-1"> <%= recipe.public? ? 'Public' : 'Private' %> </p>
+                        <label class="switch">
+                            <input type="checkbox" disabled <%= recipe.public? ? 'checked' : '' %>>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+
+
+
                 </div>
                 <p><strong>Cooking Time: </strong><%= pluralize(recipe.cooking_time, 'hour') %></p>
                 <p><strong>Steps: </strong><%= recipe.description %></p>
