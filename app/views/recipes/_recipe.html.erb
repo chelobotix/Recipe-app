@@ -2,7 +2,7 @@
         <div class="recipes_container">
             <h3><%= link_to "Recipe #{recipe.id}: #{recipe.name}", recipe_path(id: recipe.id) %></h3>
             <p> <%= "#{recipe.description[0..100]}..." %> </p>
-            <%= button_to "Delete Recipe", recipe_path(id: recipe.id), method: :delete %>
+            <%= button_to "Remove", recipe_path(id: recipe.id), method: :delete %>
         </div>
     <% else %>
         <div class="recipe_container">
@@ -18,8 +18,17 @@
                 id: "my_id", method: :get,
                 :onclick => "alert('Input collected!')"
             %>
-            <%= button_to "Add ingredient", foods_path, class: "my_class" %>
+            <%= button_to "Add ingredient", recipes_add_ingredient_path, method: :get, class: "my_class" %>
 
             <hr>
+
+            <div class="ingredients_container">
+                <% recipe.foods.each do |food| %>
+                  <p><%= food.name %></p>
+                  <p><%= "#{pluralize(recipe.recipe_ingredient_quantity(food.id), food.measurement_unit)}" %></p>
+                  <%= link_to "Modify", method: :put, class: "my_class" %>
+                  <%= link_to "Remove", method: :delete, class: "my_class" %>
+                <% end %>
+            </div>
         </div>
     <% end %>

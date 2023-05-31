@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
   # Select a new ingredient for a recipe
   # GET /recipes/1/new_ingredient
   def new_ingredient
-    @food = Food.all
+    @recipe_food = RecipeFood.new()
 
     render :new_ingredient
   end
@@ -47,10 +47,6 @@ class RecipesController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
       end
     end
-
-    @food = Food.find(params[:recipe][:food])
-    @recipe.foods << @food
-    redirect_to recipe_path(id: @recipe)
   end
 
   # DELETE /recipes/1 or /recipes/1.json
@@ -76,9 +72,9 @@ class RecipesController < ApplicationController
     end
 
     def ingredient_params
-      food_id = params[:food][:food_select].to_s.split("-").first.rstrip.to_i
+      food_id = params[:recipe_food][:food_select].to_s.split("-").first.rstrip.to_i
+      puts food_id
       recipe_id = params[:id]
-
-      params.require(:recipe).permit(:quantity, :food_id, :recipe_id)
+      params.require(:recipe_food).permit(:quantity).merge(food_id: food_id).merge(recipe_id: 3)
     end
 end
