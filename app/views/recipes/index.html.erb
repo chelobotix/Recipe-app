@@ -1,11 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Recipes</h1>
+<h1 class="text-center text-2xl font-bold my-4">Recipes</h1>
 
-<div id="recipes">
+<%= link_to "New recipe", new_recipe_path, class:"btn-primary ml-10 mr-5" %>
+
+<div id="recipes" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-10 ml-10">
   <% @recipes.each do |recipe| %>
     <%= render recipe %>
   <% end %>
 </div>
-
-<%= link_to "New recipe", new_recipe_path %>
