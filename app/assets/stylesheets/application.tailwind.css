@@ -6,12 +6,15 @@
   .btn-primary {
     @apply px-3 py-2 border rounded-md border-blue-600 text-white bg-blue-600 hover:bg-white hover:text-blue-600 transition;
   }
+
   .btn-caution {
     @apply px-3 py-2 border rounded-md border-red-600 text-white bg-red-600 hover:bg-white hover:text-red-600 transition;
   }
+
   .btn-secondary {
     @apply px-3 py-2 border rounded-md border-gray-500 text-white bg-gray-500 hover:bg-white hover:text-gray-500 transition;
   }
+
   .title {
     @apply text-center text-2xl mt-3;
   }

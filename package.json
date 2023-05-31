@@ -1,9 +1,9 @@
 {
   "devDependencies": {
-    "stylelint": "~13.0.0",
-    "stylelint-config-standard": "~21.0.0",
-    "stylelint-csstree-validator": "~1.0.0",
-    "stylelint-scss": "~3.0.0"
+    "stylelint": "^15.6.2",
+    "stylelint-config-standard": "^33.0.0",
+    "stylelint-csstree-validator": "^2.1.0",
+    "stylelint-scss": "^5.0.0"
   },
   "scripts": {
     "lint:css": "stylelint \"**/*.{css,scss}\" --fix",
