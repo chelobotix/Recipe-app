@@ -1,0 +1,8 @@
+<%= form_with model: @recipe_food, url: recipes_add_ingredient_post_path, method: :post do |form| %>
+  <%= form.select :food_select, food_names %>
+
+  <%= form.number_field :quantity %>
+
+  <%= form.submit "Add Ingredient" %>
+
+<% end %>

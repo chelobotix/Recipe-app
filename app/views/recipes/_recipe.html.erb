@@ -1,12 +1,12 @@
     <% if current_page?(:controller => 'recipes', :action => 'index') %>
         <div class="recipes_container">
-            <h3><%= link_to "Recipe #{recipe.id}: #{recipe.name}", user_recipe_path(id: recipe.id) %></h3>
+            <h3><%= link_to "Recipe #{recipe.id}: #{recipe.name}", recipe_path(id: recipe.id) %></h3>
             <p> <%= "#{recipe.description[0..100]}..." %> </p>
-            <%= button_to "Delete Recipe", user_recipe_path(id: recipe.id), method: :delete %>
+            <%= button_to "Remove", recipe_path(id: recipe.id), method: :delete %>
         </div>
     <% else %>
         <div class="recipe_container">
-            <h2><%= link_to "Recipe #{recipe.id}: #{recipe.name}", user_recipe_path(id: recipe.id) %></h3>
+            <h2><%= link_to "Recipe #{recipe.id}: #{recipe.name}", recipe_path(id: recipe.id) %></h3>
             <div>
                 <p> <%= "Preparation Time: #{pluralize(recipe.preparation_time, 'hour')}" %> </p>
                 <p> Toggle button</p>
@@ -14,12 +14,24 @@
             <p> <%= "Cooking Time: #{pluralize(recipe.cooking_time, 'hour')}" %> </p>
             <p> <%= "Steps: #{recipe.description}" %> </p>
             <%= button_to "Generate shopping list",
-                user_recipes_path, class: "my_class",
+                recipes_path, class: "my_class",
                 id: "my_id", method: :get,
                 :onclick => "alert('Input collected!')"
             %>
-            <%= button_to "Add ingredient", user_foods_path, class: "my_class" %>
+            <%= button_to "Add ingredient", recipes_add_ingredient_path, method: :get, class: "my_class" %>
 
             <hr>
+
+            <div class="ingredients_container">
+                <% recipe.foods.each_with_index do |food, index| %>
+                  <p><%= food.name %></p>
+                  <p><%= "#{pluralize(recipe.recipe_ingredient_quantity(food.id), food.measurement_unit)}" %></p>
+                  <%= link_to "Modify",
+                    recipe_edit_ingredient_path(:edit_params => {:food_name => food.name, :food_id => food.id, :quantity => recipe.recipe_ingredient_quantity(food.id)}),
+                    method: :put,
+                    class: "my_class" %>
+                  <%= button_to "Remove", recipes_delete_ingredient_path(:food_id => food.id, :index => index), method: :delete, class: "my_class" %>
+                <% end %>
+            </div>
         </div>
     <% end %>
