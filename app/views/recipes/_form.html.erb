@@ -34,6 +34,15 @@
         <%= form.text_area :description, autocomplete: "description", class:'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500' %>
       </div>
 
+      <div class="mb-4">
+        <label class="switch">
+          <%= form.check_box :public, class:"checkbox" %>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+
+
       <button class="btn-primary">
         <%= form.submit %>
       </button>
