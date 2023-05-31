@@ -1,0 +1,16 @@
+<%= form_with model: @recipe_food, url: recipe_edit_ingredient_put_path, method: :put do |form| %>
+  <div class="field">
+    <%= form.label :food %><br />
+    <%= form.text_field :food, value: params[:edit_params][:food_name], disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity %><br />
+    <%= form.number_field :quantity, value: params[:edit_params][:quantity] %>
+  </div>
+
+  <%= form.hidden_field :food_id, value: params[:edit_params][:food_id] %>
+
+  <%= form.submit "Edit quantity" %>
+
+<% end %>
