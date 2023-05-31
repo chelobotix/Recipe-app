@@ -14,33 +14,32 @@
     </div>
   <% end %>
 
-<!-- component -->
-    <div class="py-8 ml-10">
-      <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
+  <div class="py-8 ml-10">
+    <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
 
-        <div class="mb-4">
-          <%= form.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
-          <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
-        </div>
+      <div class="mb-4">
+        <%= form.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+      </div>
 
-        <div class="mb-4">
-          <%= form.label :measurement_unit, class: "block text-gray-700 text-sm font-bold mb-2" %>
-          <%= form.text_field :measurement_unit, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"%>
-        </div>
+      <div class="mb-4">
+        <%= form.label :measurement_unit, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.text_field :measurement_unit, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"%>
+      </div>
 
-        <div class="mb-4">
-          <%= form.label :price, class: "block text-gray-700 text-sm font-bold mb-2" %>
-          <%= form.text_field :price, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
-        </div>
+      <div class="mb-4">
+        <%= form.label :price, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.text_field :price, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+      </div>
 
-        <div class="mb-4">
-          <%= form.label :quantity, class: "block text-gray-700 text-sm font-bold mb-2" %>
-          <%= form.number_field :quantity, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
-        </div>
+      <div class="mb-4">
+        <%= form.label :quantity, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.number_field :quantity, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+      </div>
 
-        <button class="btn-primary">
-          <%= form.submit %>
-        </button>
-      </form>
-    </div>
+      <button class="btn-primary">
+        <%= form.submit %>
+      </button>
+    </form>
+  </div>
 <% end %>

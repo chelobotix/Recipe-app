@@ -12,4 +12,7 @@
   .btn-secondary {
     @apply px-3 py-2 border rounded-md border-gray-500 text-white bg-gray-500 hover:bg-white hover:text-gray-500 transition;
   }
+  .title {
+    @apply text-center text-2xl mt-3;
+  }
 }
