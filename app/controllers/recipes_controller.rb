@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to recipe_path(id: @recipe), notice: "Recipe was successfully created." }
+        format.html { redirect_to recipe_path(id: @recipe), notice: 'Recipe was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
   # Select a new ingredient for a recipe
   # GET /recipes/1/new_ingredient
   def new_ingredient
-    @recipe_food = RecipeFood.new()
+    @recipe_food = RecipeFood.new
 
     render :new_ingredient
   end
@@ -42,7 +42,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @food.save
-        format.html { redirect_to recipe_path(id: @recipe), notice: "Ingredient was successfully added." }
+        format.html { redirect_to recipe_path(id: @recipe), notice: 'Ingredient was successfully added.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -54,27 +54,27 @@ class RecipesController < ApplicationController
     @recipe.destroy
 
     respond_to do |format|
-      format.html { redirect_to recipes_path, notice: "Recipe was successfully destroyed." }
+      format.html { redirect_to recipes_path, notice: 'Recipe was successfully destroyed.' }
     end
   end
 
   private
 
-
-
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
-    # Only allow a list of trusted parameters through.
-    def recipe_params
-      params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public).merge(
-                                                                                                     user_id: current_user.id)
-    end
 
-    def ingredient_params
-      food_id = params[:recipe_food][:food_select].to_s.split("-").first.rstrip.to_i
-      puts food_id
-      recipe_id = params[:id]
-      params.require(:recipe_food).permit(:quantity).merge(food_id: food_id).merge(recipe_id: 3)
-    end
+  # Only allow a list of trusted parameters through.
+  def recipe_params
+    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public).merge(
+      user_id: current_user.id
+    )
+  end
+
+  def ingredient_params
+    food_id = params[:recipe_food][:food_select].to_s.split('-').first.rstrip.to_i
+    puts food_id
+    params[:id]
+    params.require(:recipe_food).permit(:quantity).merge(food_id:).merge(recipe_id: 3)
+  end
 end

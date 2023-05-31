@@ -15,30 +15,49 @@
             </div>
         </div>
     <% else %>
-        <div class="recipe_container">
-            <h2><%= link_to "Recipe #{recipe.id}: #{recipe.name}", recipe_path(id: recipe.id) %></h3>
-            <div>
-                <p> <%= "Preparation Time: #{pluralize(recipe.preparation_time, 'hour')}" %> </p>
-                <p> Toggle button</p>
+        <div class="ml-10 mt-8">
+            <h1 class="text-center text-2xl font-bold"><%= recipe.name %></h1>
+            <div class="flex flex-col gap-2 mt-5">
+                <div class="flex justify-between">
+                    <p><strong>Preparation Time: </strong><%= pluralize(recipe.preparation_time, 'hour') %></p>
+                    <button>Public toggle</button>
+                </div>
+                <p><strong>Cooking Time: </strong><%= pluralize(recipe.cooking_time, 'hour') %></p>
+                <p><strong>Steps: </strong><%= recipe.description %></p>
+                <div class="flex justify-between">
+                    <button>Generate Shopping List</button>
+                    <button>Add Ingredient</button>
+                </div>
             </div>
-            <p> <%= "Cooking Time: #{pluralize(recipe.cooking_time, 'hour')}" %> </p>
-            <p> <%= "Steps: #{recipe.description}" %> </p>
-            <%= button_to "Generate shopping list",
-                recipes_path, class: "my_class",
-                id: "my_id", method: :get,
-                :onclick => "alert('Input collected!')"
-            %>
-            <%= button_to "Add ingredient", recipes_add_ingredient_path, method: :get, class: "my_class" %>
 
-            <hr>
-
-            <div class="ingredients_container">
-                <% recipe.foods.each do |food| %>
-                  <p><%= food.name %></p>
-                  <p><%= "#{pluralize(recipe.recipe_ingredient_quantity(food.id), food.measurement_unit)}" %></p>
-                  <%= link_to "Modify", method: :put, class: "my_class" %>
-                  <%= link_to "Remove", method: :delete, class: "my_class" %>
+            <table class="w-full border-collapse mt-5">
+                <thead>
+                <tr class="bg-gray-300">
+                    <th class="p-4 text-left">Food</th>
+                    <th class="p-4 text-left">Quantity</th>
+                    <th class="p-4 text-left">Unit Price</th>
+                    <th class="p-4 text-left">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% if recipe.foods %>
+                    <% recipe.foods.reverse.each do |food| %>
+                    <tr class="border border-2 ">
+                        <td class="p-4"><%= food.name%></td>
+                        <td class="p-4"><%= food.quantity%></td>
+                        <td class="p-4"><%= food.price%></td>
+                        <td class="p-4">
+                        <%= link_to "Modify", method: :put, class: "my_class" %>
+                        <%= link_to "Remove", method: :delete, class: "my_class" %>
+                        </td>
+                    </tr>
+                    <% end %>
+                <% else %>
+                    <tr>
+                    <td colspan="4" class="p-4 text-center">No Food Found</td>
+                    </tr>
                 <% end %>
-            </div>
+                </tbody>
+            </table>
         </div>
     <% end %>
