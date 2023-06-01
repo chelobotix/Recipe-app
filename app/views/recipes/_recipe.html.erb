@@ -31,10 +31,12 @@
       id: "my_id",
       method: :get,
       onclick: "alert('Input collected!')" %>
-      <%= button_to "Add ingredient",
-      recipes_add_ingredient_path,
-      method: :get,
-      class: "btn-primary" %>
+      <% if can? :destroy, recipe %>
+        <%= button_to "Add ingredient",
+        recipes_add_ingredient_path,
+        method: :get,
+        class: "btn-primary" %>
+      <% end %>
     </div>
   </div>
 
