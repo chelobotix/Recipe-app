@@ -73,4 +73,4 @@ end
 
 gem 'tailwindcss-rails', '~> 2.0'
 
-gem 'erb_lint', '~> 0.4.0'
+gem "erb-formatter", "~> 0.4.3"
