@@ -22,15 +22,14 @@
                     <p><strong>Preparation Time: </strong><%= pluralize(recipe.preparation_time, 'hour') %></p>
 
                     <div>
-                        <p class="text-center font-bold text-lg mb-1"> <%= recipe.public? ? 'Public' : 'Private' %> </p>
-                        <label class="switch">
-                            <input type="checkbox" disabled <%= recipe.public? ? 'checked' : '' %>>
-                            <span class="slider"></span>
-                        </label>
+                        <%= form_with url: recipes_toggle_path, method: :put do |form| %>
+                            <p id="toggle_p" class="text-center font-bold text-lg mb-1"> <%= recipe.public? ? 'Public' : 'Private' %> </p>
+                            <label class="switch">
+                                <%= form.check_box :public, id: 'toggle', checked: recipe.public?, onchange: 'this.form.submit();' %>
+                                <span class="slider"></span>
+                            </label>
+                        <% end %>
                     </div>
-
-
-
 
                 </div>
                 <p><strong>Cooking Time: </strong><%= pluralize(recipe.cooking_time, 'hour') %></p>
@@ -81,3 +80,5 @@
             </table>
         </div>
     <% end %>
+
+<%= javascript_include_tag 'toggle' %>

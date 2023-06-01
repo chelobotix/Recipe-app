@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
   before_action :set_recipe,
                 only: %i[show destroy new_ingredient add_ingredient edit_ingredient update_ingredient
-                         destroy_ingredient]
+                         destroy_ingredient, toggle]
+
 
   # GET /recipes or /recipes.json
   def index
@@ -83,6 +84,15 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to recipes_path, notice: 'Recipe was successfully deleted.' }
+    end
+  end
+
+  def toggle
+    if @recipe.public
+      @recipe.update(public: false)
+    else
+      @recipe.update(public: true)
+
     end
   end
 
