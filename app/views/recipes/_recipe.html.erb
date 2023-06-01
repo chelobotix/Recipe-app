@@ -9,13 +9,24 @@
           <p class="text-center font-bold text-lg mb-1 toggle_p">
             <%= recipe.public? ? "Public" : "Private" %>
           </p>
-          <label class="switch">
-            <%= form.check_box :public,
-                           id: "toggle",
-                           checked: recipe.public?,
-                           onchange: "this.form.submit();" %>
-            <span class="slider"></span>
-          </label>
+          <% if can? :destroy, recipe %>
+            <label class="switch">
+              <%= form.check_box :public,
+                             id: "toggle",
+                             checked: recipe.public?,
+                             onchange: "this.form.submit();" %>
+              <span class="slider"></span>
+            </label>
+          <% else %>
+            <label class="switch">
+              <%= form.check_box :public,
+                             id: "toggle",
+                             checked: recipe.public?,
+                             disabled: true,
+                             onchange: "this.form.submit();" %>
+              <span class="slider"></span>
+            </label>
+          <% end %>
         <% end %>
       </div>
 
