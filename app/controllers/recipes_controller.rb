@@ -5,9 +5,9 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    if user_signed_in?
-      @recipes = Recipe.where(user: current_user.id)
-    end
+    return unless user_signed_in?
+
+    @recipes = Recipe.where(user: current_user.id)
   end
 
   # GET /recipes/1 or /recipes/1.json
@@ -105,7 +105,7 @@ class RecipesController < ApplicationController
     params.require(:recipe_food).permit(:quantity).merge(food_id:).merge(recipe_id: params[:id])
   end
 
-    def ingredient_params_update
-      params.require(:recipe_food).permit(:id, :quantity)
-    end
+  def ingredient_params_update
+    params.require(:recipe_food).permit(:id, :quantity)
+  end
 end

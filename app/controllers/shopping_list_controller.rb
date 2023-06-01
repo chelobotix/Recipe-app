@@ -1,9 +1,21 @@
 class ShoppingListController < ApplicationController
   before_action :authenticate_user!
   def index
-    @food_items = current_user.recipes.map(&:foods).flatten
+    user = current_user
+    @missing_foods = []
+    @total_price = 0
 
-    @missing_food_items = current_user.foods - @food_items
-    @total_price = @missing_food_items.sum(&:price)
+    user.recipes.each do |recipe|
+      recipe.recipe_foods.each do |recipe_food|
+        available_food = Food.find_by(user_id: user.id, id: recipe_food.food_id)
+        next unless available_food && available_food.quantity < recipe_food.quantity
+
+        missing_quantity = recipe_food.quantity - available_food.quantity
+        missing_food = MissingFoodDecorator.new(available_food, missing_quantity)
+        @missing_foods << missing_food
+
+        @total_price += missing_food.price * missing_food.quantity
+      end
+    end
   end
 end
