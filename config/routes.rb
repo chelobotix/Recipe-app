@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   delete '/recipes/:id/delete_ingredient', to: 'recipes#destroy_ingredient', as: 'recipes_delete_ingredient'
   put '/recipes/:id/toggle_status', to: 'recipes#toggle', as: 'recipes_toggle'
 
-  # root '/recipes#index'
+  root 'recipes#public_recipes'
 end

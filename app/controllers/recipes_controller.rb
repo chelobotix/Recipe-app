@@ -4,6 +4,11 @@ class RecipesController < ApplicationController
                 only: %i[show destroy new_ingredient add_ingredient edit_ingredient update_ingredient
                          destroy_ingredient toggle]
 
+  # GET /public_recipes
+  def public_recipes
+    @recipes = Recipe.where(public: true)
+  end
+
   # GET /recipes or /recipes.json
   def index
     return unless user_signed_in?

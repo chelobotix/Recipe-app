@@ -1,34 +1,80 @@
-<h2>Sign up</h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
+  <div class=" flex min-h-screen items-center justify-center ml-10 p-12 ">
+    <form action="">
+      <div
+        class="
+          max-w-sm
+          rounded-3xl
+          bg-gradient-to-b
+          from-sky-300
+          to-purple-500
+          p-px
+        "
+      >
+        <div class="rounded-[calc(1.5rem-1px)] bg-white px-10 p-12">
+          <div>
+            <h1 class="text-xl font-semibold text-gray-800 ">Create you account for free</h1>
+            <p class="text-sm tracking-wide text-gray-600 ">Already have an account?
+              <%= link_to "Log in",
+              new_session_path(resource_name),
+              class: "text-blue-600 transition duration-200 hover:underline " %>
+              to your account</p>
+          </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
+          <div class="mt-8 space-y-8">
+            <div class="space-y-6">
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+              <div class="field ">
+                <%= f.label :name, class: "" %><br/>
+                <%= f.text_field :name,
+                             autofocus: true,
+                             autocomplete: "name",
+                             class:
+                               "w-full bg-transparent text-gray-600 rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500 " %>
+              </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+              <div class="field ">
+                <%= f.label :email, class: "" %><br/>
+                <%= f.email_field :email,
+                              autofocus: true,
+                              autocomplete: "email",
+                              class:
+                                "w-full bg-transparent text-gray-600  rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500 " %>
+              </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+              <div class="field">
+                <%= f.label :password, class: "" %>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %>
+                    characters minimum)</em>
+                <% end %><br/>
+                <%= f.password_field :password,
+                                 autocomplete: "new-password",
+                                 class:
+                                   "w-full bg-transparent text-gray-600  rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500 " %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password_confirmation, class: "" %><br/>
+                <%= f.password_field :password_confirmation,
+                                 autocomplete: "new-password",
+                                 class:
+                                   "w-full bg-transparent text-gray-600  rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500 " %>
+              </div>
+
+            </div>
+
+            <div class="actions">
+              <%= f.submit "Sign up",
+                       class:
+                         "h-9 px-3 w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:bg-blue-700 transition duration-500 rounded-md text-white" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%# <%= render "devise/shared/links" %>

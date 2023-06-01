@@ -11,7 +11,7 @@
   width: 100%;
   text-align: center;
   height: 100%;
-  transition: transform 0.8s;
+  transition: transform 0.5s;
   transform-style: preserve-3d;
 }
 
