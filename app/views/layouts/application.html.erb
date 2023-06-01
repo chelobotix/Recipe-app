@@ -11,9 +11,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-100 container">
+  <body class="bg-gray-100">
+    <%= render "layouts/header" %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container"><%= yield %></div>
   </body>
 </html>

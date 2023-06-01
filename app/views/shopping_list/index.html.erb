@@ -1,0 +1,26 @@
+<div class="container ml-10 flex flex-col">
+  <h1 class="title">Shopping List</h1>
+  <div class="flex mt-5 justify-between">
+    <h3>Amount of food items to buy: <%= @missing_foods.length %> </h3>
+    <h3>Total cost of the food needed: $<%= @total_price %> </h3>
+  </div>
+
+  <table class="mt-10">
+    <thead>
+      <tr class="bg-gray-400">
+        <th class="p-4 text-left">Food</th>
+        <th class="p-4 text-left">Quantity</th>
+        <th class="p-4 text-left">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @missing_foods.each do |missing_food| %>
+        <tr class="border border-2">
+          <td class="p-4"><%= missing_food.name %></td>
+          <td class="p-4"><%= missing_food.quantity %></td>
+          <td class="p-4"><%= missing_food.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
