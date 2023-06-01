@@ -8,7 +8,6 @@ class Recipe < ApplicationRecord
   validates :cooking_time, numericality: { greater_than: 0 }
 
   def recipe_ingredient_quantity(food_id)
-    recipe_foods.where(food_id: food_id)[0].quantity
+    recipe_foods.where(food_id:)[0].quantity
   end
-
 end
