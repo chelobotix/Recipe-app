@@ -34,8 +34,7 @@
 }
 
 .flip-card-front {
-  background:
-  linear-gradient(
+  background: linear-gradient(
     120deg,
     bisque 60%,
     rgb(255 231 222) 88%,
@@ -46,8 +45,7 @@
 }
 
 .flip-card-back {
-  background:
-  linear-gradient(
+  background: linear-gradient(
     120deg,
     rgb(255 174 145) 30%,
     coral 88%,
