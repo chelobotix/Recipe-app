@@ -1,15 +1,17 @@
 <%= form_with model: @recipe_food, url: recipe_edit_ingredient_put_path, method: :put do |form| %>
-
   <div class="w-full max-w-sm mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
     <div class="mb-4">
-      <%= form.label :food, class:'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= form.text_field :food, value: params[:edit_params][:food_name], disabled: true, class:'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500' %>
+      <%= form.label :food, class:'block text-gray-700 text-sm font-bold mb-2' %><br />
+      <%= form.text_field :food, value: params[:edit_params][:recipe_foods_food_name], disabled: true, class:'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500' %>
     </div>
-    <div class="mb-4">
-      <%= form.label :quantity, class:'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= form.number_field :quantity, value: params[:edit_params][:quantity], class:'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500' %>
+
+    <div class="field">
+    <%= form.label :quantity, class:'block text-gray-700 text-sm font-bold mb-2' %><br />
+    <%= form.number_field :quantity, value: params[:edit_params][:recipe_foods_quantity], class:'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500' %>
     </div>
-    <%= form.hidden_field :food_id, value: params[:edit_params][:food_id] %>
+
+    <%= form.hidden_field :id, value: params[:edit_params][:recipe_foods_id] %>
+
     <%= form.submit "Edit quantity", class:"btn-primary" %>
   </div>
 

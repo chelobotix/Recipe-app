@@ -6,8 +6,4 @@ class Recipe < ApplicationRecord
   validates :name, presence: true
   validates :preparation_time, numericality: { greater_than: 0 }
   validates :cooking_time, numericality: { greater_than: 0 }
-
-  def recipe_ingredient_quantity(food_id)
-    recipe_foods.where(food_id:)[0].quantity
-  end
 end
