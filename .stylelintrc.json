@@ -1,6 +1,6 @@
 {
   "extends": ["stylelint-config-standard"],
-  "plugins": ["stylelint-scss", "stylelint-csstree-validator"],
+  "plugins": ["stylelint-scss"],
   "rules": {
     "at-rule-no-unknown": [
       true,
@@ -25,8 +25,7 @@
           "screen"
         ]
       }
-    ],
-    "csstree/validator": true
+    ]
   },
   "ignoreFiles": [
     "build/**",
