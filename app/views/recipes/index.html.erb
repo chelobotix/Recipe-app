@@ -3,9 +3,13 @@
 <h1>Recipes</h1>
 
 <div id="recipes">
+  <% if user_signed_in? %>
   <% @recipes.each do |recipe| %>
     <%= render recipe %>
   <% end %>
+<%= link_to "New recipe", new_recipe_path %>
+<% else %>
+  <h1>Please <a href="/users/sign_in"> Sign in</a>to see your Recipes </h1>
+<% end %>
 </div>
 
-<%= link_to "New recipe", new_recipe_path %>

@@ -60,6 +60,8 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'faker'
   gem 'letter_opener'
+  gem 'pry', '~> 0.13.1'
+  gem 'pry-byebug'
   gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
