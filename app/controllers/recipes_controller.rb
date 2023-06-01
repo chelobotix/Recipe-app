@@ -1,8 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe,
                 only: %i[show destroy new_ingredient add_ingredient edit_ingredient update_ingredient
-                         destroy_ingredient, toggle]
-
+                         destroy_ingredient toggle]
 
   # GET /recipes or /recipes.json
   def index
