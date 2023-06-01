@@ -1,10 +1,12 @@
-
 <div class="flex flex-col items-center mt-10 ml-10">
-  <%= link_to "New food", new_food_path, class: "self-end py-2 px-3 bg-blue-500 rounded-lg mb-5 font-bold text-white" %>
+  <%= link_to "New food",
+  new_food_path,
+  class: "self-end py-2 px-3 bg-blue-500 rounded-lg mb-5 font-bold text-white" %>
   <table class="w-full border-collapse">
     <thead>
       <tr class="bg-gray-300">
         <th class="p-4 text-left">Food</th>
+        <th class="p-4 text-left">Quantity</th>
         <th class="p-4 text-left">Measurement Unit</th>
         <th class="p-4 text-left">Unit Price</th>
         <th class="p-4 text-left">Actions</th>
@@ -14,11 +16,18 @@
       <% if @foods.present? %>
         <% @foods.reverse.each do |food| %>
           <tr class="border border-2 ">
-            <td class="p-4"><%= food.name%></td>
-            <td class="p-4"><%= food.measurement_unit%></td>
-            <td class="p-4"><%= food.price%></td>
+            <td class="p-4"><%= food.name %></td>
+            <td class="p-4"><%= food.quantity %></td>
+            <td class="p-4"><%= food.measurement_unit %></td>
+            <td class="p-4"><%= food.price %></td>
             <td class="p-4">
-              <%= button_to "delete", food_path(food.id), data: { :confirm => "Are you sure?"}, :method => :delete, class: "underline" %>
+              <%= button_to "delete",
+              food_path(food.id),
+              data: {
+                confirm: "Are you sure?"
+              },
+              method: :delete,
+              class: "underline" %>
             </td>
           </tr>
         <% end %>
