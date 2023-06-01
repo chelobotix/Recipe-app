@@ -47,15 +47,6 @@
 
             <hr>
 
-            <div class="ingredients_container">
-                <% recipe.recipe_foods.includes(:food).each do |recipe_food| %>
-                    <p><%= recipe_food.food.name %></p>
-                    <p><%= "#{pluralize(recipe_food.quantity, recipe_food.food.measurement_unit)}" %></p>
-                    <%= link_to "Modify",
-                        recipe_edit_ingredient_path(:edit_params => {:recipe_foods_id => recipe_food.id, :recipe_foods_food_id => recipe_food.food_id, :recipe_foods_quantity => recipe_food.quantity, :recipe_foods_food_name => recipe_food.food.name }),
-                        method: :put,
-                        class: "my_class" %>
-                    <%= button_to "Remove", recipes_delete_ingredient_path(:recipe_foods_id => recipe_food.id), method: :delete, class: "my_class" %>
             <table class="w-full border-collapse mt-5">
                 <thead>
                 <tr class="bg-gray-300">
@@ -67,18 +58,17 @@
                 </thead>
                 <tbody>
                 <% if recipe.foods %>
-                    <% recipe.foods.each_with_index do |food, index| %>
+                    <% recipe.recipe_foods.includes(:food).each do |recipe_food| %>
                     <tr class="border border-2 ">
-                        <td class="p-4"><%= food.name %></td>
-                        <td class="p-4"><%= recipe.recipe_ingredient_quantity(food.id) %></td>
-                        <td class="p-4"><%= food.price %></td>
+                        <td class="p-4"><%= recipe_food.food.name %></td>
+                        <td class="p-4"><%= "#{pluralize(recipe_food.quantity, recipe_food.food.measurement_unit)}" %></td>
+                        <td class="p-4"><%= recipe_food.food.price %></td>
                         <td class="p-4">
                         <%= link_to "Modify",
-                            recipe_edit_ingredient_path(:edit_params => {:food_name => food.name, :food_id => food.id, :quantity => recipe.recipe_ingredient_quantity(food.id)}),
-                            method: :put,
-                            class: "my_class"
-                        %>
-                        <%= button_to "Remove", recipes_delete_ingredient_path(:food_id => food.id, :index => index), method: :delete, class: "my_class" %>
+                        recipe_edit_ingredient_path(:edit_params => {:recipe_foods_id => recipe_food.id, :recipe_foods_food_id => recipe_food.food_id, :recipe_foods_quantity => recipe_food.quantity, :recipe_foods_food_name => recipe_food.food.name }),
+                        method: :put,
+                        class: "my_class" %>
+                        <%= button_to "Remove", recipes_delete_ingredient_path(:recipe_foods_id => recipe_food.id), method: :delete, class: "my_class" %>
                         </td>
                     </tr>
                     <% end %>
