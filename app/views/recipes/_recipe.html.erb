@@ -1,107 +1,86 @@
-<% if current_page?(:controller => 'recipes', :action => 'index') %>
-  <div class="flip-card">
-    <div class="flip-card-inner ">
-      <div class="flip-card-front px-3">
-        <p class="font-bold text-xl"><%= "Recipe #{recipe.id}" %></p>
-        <p class="text-lg"><%= recipe.name %></p>
+<div class="ml-10 mt-8 mb-5">
+  <h1 class="text-center text-2xl font-bold"><%= recipe.name %></h1>
+  <div class="flex flex-col gap-2 my-5 mb-5">
+    <div class="flex justify-between">
+      <p><strong>Preparation Time:
+        </strong><%= pluralize(recipe.preparation_time, "hour") %></p>
+      <div>
+        <%= form_with url: recipes_toggle_path, method: :put do |form| %>
+          <p class="text-center font-bold text-lg mb-1 toggle_p">
+            <%= recipe.public? ? "Public" : "Private" %>
+          </p>
+          <label class="switch">
+            <%= form.check_box :public,
+                           id: "toggle",
+                           checked: recipe.public?,
+                           onchange: "this.form.submit();" %>
+            <span class="slider"></span>
+          </label>
+        <% end %>
       </div>
-      <div class="flip-card-back px-3">
-        <a href="<%= recipe_path(id: recipe.id) %>">
-          <p class="text-lg font-bold mb-2"><%= recipe.name %></p>
-          <p class=""><%= "#{recipe.description[0..100]}..." %></p>
-        </a>
-        <%= button_to "Remove",
-        recipe_path(id: recipe.id),
-        method: :delete,
-        class: "mt-5 font-bold text-lg hover:underline hover:text-red-600" %>
-      </div>
+
+    </div>
+    <p><strong>Cooking Time:
+      </strong><%= pluralize(recipe.cooking_time, "hour") %></p>
+    <p><strong>Steps:
+      </strong><%= recipe.description %></p>
+    <div class="flex justify-between">
+      <%= button_to "Generate shopping list",
+      recipes_path,
+      class: "btn-secondary",
+      id: "my_id",
+      method: :get,
+      onclick: "alert('Input collected!')" %>
+      <%= button_to "Add ingredient",
+      recipes_add_ingredient_path,
+      method: :get,
+      class: "btn-primary" %>
     </div>
   </div>
-<% else %>
-  <div class="ml-10 mt-8 mb-5">
-    <h1 class="text-center text-2xl font-bold"><%= recipe.name %></h1>
-    <div class="flex flex-col gap-2 my-5">
-      <div class="flex justify-between">
-        <p><strong>Preparation Time:
-          </strong><%= pluralize(recipe.preparation_time, "hour") %></p>
-        <div>
-          <%= form_with url: recipes_toggle_path, method: :put do |form| %>
-            <p class="text-center font-bold text-lg mb-1 toggle_p">
-              <%= recipe.public? ? "Public" : "Private" %>
-            </p>
-            <label class="switch">
-              <%= form.check_box :public,
-                             id: "toggle",
-                             checked: recipe.public?,
-                             onchange: "this.form.submit();" %>
-              <span class="slider"></span>
-            </label>
-          <% end %>
-        </div>
 
-      </div>
-      <p><strong>Cooking Time:
-        </strong><%= pluralize(recipe.cooking_time, "hour") %></p>
-      <p><strong>Steps:
-        </strong><%= recipe.description %></p>
-      <div class="flex justify-between">
-        <%= button_to "Generate shopping list",
-        recipes_path,
-        class: "btn-secondary",
-        id: "my_id",
-        method: :get,
-        onclick: "alert('Input collected!')" %>
-        <%= button_to "Add ingredient",
-        recipes_add_ingredient_path,
-        method: :get,
-        class: "btn-primary" %>
-      </div>
-    </div>
+  <hr>
 
-    <hr>
-
-    <table class="w-full border-collapse mt-5">
-      <thead>
-        <tr class="bg-gray-300">
-          <th class="p-4 text-left">Food</th>
-          <th class="p-4 text-left">Quantity</th>
-          <th class="p-4 text-left">Unit Price</th>
-          <th class="p-4 text-left">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if recipe.foods %>
-          <% recipe.recipe_foods.includes(:food).each do |recipe_food| %>
-            <tr class="border border-2 ">
-              <td class="p-4"><%= recipe_food.food.name %></td>
-              <td class="p-4"><%= "#{pluralize(recipe_food.quantity, recipe_food.food.measurement_unit)}" %></td>
-              <td class="p-4"><%= recipe_food.food.price %></td>
-              <td class="p-4">
-                <%= link_to "Modify",
-                recipe_edit_ingredient_path(
-                  edit_params: {
-                    recipe_foods_id: recipe_food.id,
-                    recipe_foods_food_id: recipe_food.food_id,
-                    recipe_foods_quantity: recipe_food.quantity,
-                    recipe_foods_food_name: recipe_food.food.name
-                  }
-                ),
-                method: :put,
-                class: "hover:underline" %>
-                <%= button_to "Remove",
-                recipes_delete_ingredient_path(recipe_foods_id: recipe_food.id),
-                method: :delete,
-                class: "hover:underline" %>
-              </td>
-            </tr>
-          <% end %>
-        <% else %>
-          <tr>
-            <td colspan="4" class="p-4 text-center">No Food Found</td>
+  <table class="w-full border-collapse mt-5">
+    <thead>
+      <tr class="bg-gray-300">
+        <th class="p-4 text-left">Food</th>
+        <th class="p-4 text-left">Quantity</th>
+        <th class="p-4 text-left">Unit Price</th>
+        <th class="p-4 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if recipe.foods %>
+        <% recipe.recipe_foods.includes(:food).each do |recipe_food| %>
+          <tr class="border border-2 ">
+            <td class="p-4"><%= recipe_food.food.name %></td>
+            <td class="p-4"><%= "#{pluralize(recipe_food.quantity, recipe_food.food.measurement_unit)}" %></td>
+            <td class="p-4"><%= recipe_food.food.price %></td>
+            <td class="p-4">
+              <%= link_to "Modify",
+              recipe_edit_ingredient_path(
+                edit_params: {
+                  recipe_foods_id: recipe_food.id,
+                  recipe_foods_food_id: recipe_food.food_id,
+                  recipe_foods_quantity: recipe_food.quantity,
+                  recipe_foods_food_name: recipe_food.food.name
+                }
+              ),
+              method: :put,
+              class: "hover:underline" %>
+              <%= button_to "Remove",
+              recipes_delete_ingredient_path(recipe_foods_id: recipe_food.id),
+              method: :delete,
+              class: "hover:underline" %>
+            </td>
           </tr>
         <% end %>
-      </tbody>
-    </table>
-  </div>
-  <%= javascript_include_tag "toggle" %>
-<% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="p-4 text-center">No Food Found</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= javascript_include_tag "toggle" %>
