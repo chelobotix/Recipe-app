@@ -1,0 +1,32 @@
+<header class="w-full text-gray-700 bg-white shadow-sm body-font">
+  <div class="container flex flex-col items-start p-6 mx-auto md:flex-row">
+
+      <a href="/" class="flex items-center text-xl italic mb-4 font-medium text-gray-800 title-font md:mb-0">
+        RailsRecipes
+      </a>
+      <nav class="flex items-center justify-center text-base md:ml-auto">
+          <a href="/" class="mr-5 font-medium hover:text-gray-900">My Recipes</a>
+          <a href="/public_recipes" class="mr-5 font-medium hover:text-gray-900">Public Recipes</a>
+          <a href="/foods" class="mr-5 font-medium hover:text-gray-900">Foods</a>
+          <a href="/shopping_list" class="font-medium hover:text-gray-900">Shopping List</a>
+      </nav>
+      <% if current_user %>
+        <div class="items-center h-full pl-6 ml-6 border-l border-gray-200 flex">
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "mr-5 font-medium hover:text-gray-900" %>
+          <a href="/"
+              class="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease">
+              <%= current_user.name %>
+          </a>
+        </div>
+      <% else %>
+      <div class="items-center h-full pl-6 ml-6 border-l border-gray-200">
+          <a href="/users/sign_in" class="mr-5 font-medium hover:text-gray-900">Login</a>
+          <a href="/users/sign_up"
+              class="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease">
+              Sign Up
+          </a>
+      </div>
+      <% end %>
+
+  </div>
+</header>
