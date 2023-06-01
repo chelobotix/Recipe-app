@@ -5,12 +5,15 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = current_user.recipes
-    puts @recipes
+    if user_signed_in?
+      @recipes = Recipe.where(user: current_user.id)
+    end
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    @foods = Food.all
+  end
 
   # GET /recipes/new
   def new
@@ -58,7 +61,7 @@ class RecipesController < ApplicationController
 
   # PUT /recipes/1/update_ingredient
   def update_ingredient
-    if @recipe.recipe_foods.update(ingredient_params_update)
+    if @recipe.recipe_foods.find(params[:recipe_food][:id]).update(ingredient_params_update)
       redirect_to recipe_path(id: @recipe), notice: 'Ingredient was successfully updated.'
     else
       format.html { render :new, status: :unprocessable_entity }
@@ -67,7 +70,7 @@ class RecipesController < ApplicationController
 
   # DELETE /recipes/1/delete_ingredient
   def destroy_ingredient
-    if @recipe.recipe_foods[params[:index].to_i].destroy
+    if @recipe.recipe_foods.find(params[:recipe_foods_id]).destroy
       redirect_to recipe_path(id: @recipe), notice: 'Ingredient was successfully deleted.'
     else
       format.html { render :new, status: :unprocessable_entity }
@@ -102,7 +105,7 @@ class RecipesController < ApplicationController
     params.require(:recipe_food).permit(:quantity).merge(food_id:).merge(recipe_id: params[:id])
   end
 
-  def ingredient_params_update
-    params.require(:recipe_food).permit(:quantity, :food_id).merge(recipe_id: params[:id])
-  end
+    def ingredient_params_update
+      params.require(:recipe_food).permit(:id, :quantity)
+    end
 end
