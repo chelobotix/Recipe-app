@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/recipes/:id/edit_ingredient', to: 'recipes#edit_ingredient', as: 'recipe_edit_ingredient'
   put '/recipes/:id/edit_ingredient', to: 'recipes#update_ingredient', as: 'recipe_edit_ingredient_put'
   delete '/recipes/:id/delete_ingredient', to: 'recipes#destroy_ingredient', as: 'recipes_delete_ingredient'
+  put '/recipes/:id/toggle_status', to: 'recipes#toggle', as: 'recipes_toggle'
 
   # root '/recipes#index'
 end
