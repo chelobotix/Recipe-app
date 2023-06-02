@@ -20,17 +20,10 @@ class FoodsController < ApplicationController
   # POST /foods or /foods.json
   def create
     @food = current_user.foods.build(food_params.except(:recipe_id))
-    recipe_id = food_params[:recipe_id]
-
     if @food.save
-      recipe = Recipe.find(recipe_id) if recipe_id
-      if recipe
-        RecipeFood.create!(recipe_id:, food_id: @food.id,
-                           quantity: @food.quantity)
-        redirect_back fallback_location: root_path, notice: 'Food was successfully created.'
-      end
+      redirect_to foods_path, notice: 'Food was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      redirect_to new_food_path, notice: 'Food was not successfully created.'
     end
   end
 
