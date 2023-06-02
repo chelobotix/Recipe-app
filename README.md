@@ -104,6 +104,15 @@ To fix all Linter error automatically
 - GitHub: [@chelobotix](https://github.com/chelobotix)
 - Linkedin: [Marcelo Alarcon](https://www.linkedin.com/in/marceloalarconb/)
 
+👤 **Author2**
+
+: Fábio Dias Lima
+
+🇧🇴 Brazil 💓
+
+- GitHub: [@limavfabio](https://github.com/limavfabio)
+- Linkedin: [Fábio Lima](https://www.linkedin.com/in/limavfabio/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
