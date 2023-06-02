@@ -4,7 +4,6 @@ require 'cancan'
 describe ShoppingListController, type: :controller do
   describe 'GET #Index' do
     it 'returns the shopping list for the current user' do
-
       # user = FactoryBot.create(:user)
       # user.confirm
       # sign_in user
@@ -19,8 +18,6 @@ describe ShoppingListController, type: :controller do
       # end
 
       # get '/shopping_list'
-
-
 
       # Create a user and foods associated with the user
       user = FactoryBot.create(:user)
@@ -45,7 +42,6 @@ describe ShoppingListController, type: :controller do
         expect(assigns(:missing_foods).map(&:food)).to include(food)
         expect(assigns(:missing_foods).find { |mf| mf.food == food }.instance_variable_get(:@missing_quantity)).to eq(1)
       end
-
     end
 
     it 'redirects to the login page for anonymous users' do

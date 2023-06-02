@@ -74,8 +74,6 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
 
-
-
   # # Configure Capybara for system tests
   # Capybara.register_driver :selenium_chrome do |app|
   #   Capybara::Selenium::Driver.new(app, browser: :chrome)
