@@ -14,6 +14,7 @@
       <tr class="bg-gray-400">
         <th class="p-4 text-left">Food</th>
         <th class="p-4 text-left">Quantity</th>
+        <th class="p-4 text-left">Measurement Unit</th>
         <th class="p-4 text-left">Price</th>
       </tr>
     </thead>
@@ -22,6 +23,7 @@
         <tr class="border border-2">
           <td class="p-4"><%= missing_food.name %></td>
           <td class="p-4"><%= missing_food.quantity %></td>
+          <td class="p-4"><%= missing_food.measurement_unit %></td>
           <td class="p-4"><%= missing_food.price %></td>
         </tr>
       <% end %>

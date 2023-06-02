@@ -59,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: recipes_db
+  database: recipes_test_db
   username: postgres
   password: <%= ENV["RAILS_RECIPES_DATABASE_PASSWORD"] %>
 
