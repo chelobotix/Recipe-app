@@ -14,6 +14,10 @@ class MissingFoodDecorator
     @missing_quantity
   end
 
+  def measurement_unit
+    food.measurement_unit
+  end
+
   def price
     food.price
   end
