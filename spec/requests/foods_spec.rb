@@ -22,6 +22,9 @@ RSpec.describe 'Foods', type: :request do
 
       foods.each do |food|
         expect(response.body).to include(food.name)
+        expect(response.body).to include(food.quantity.to_s)
+        expect(response.body).to include(food.measurement_unit)
+        expect(response.body).to include(food.price.to_s)
       end
     end
   end
