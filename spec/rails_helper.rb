@@ -72,25 +72,17 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
 
   # Configure Capybara for system tests
-  Capybara.register_driver :selenium_chrome_headless do |app|
-    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-      chromeOptions: { args: %w[headless disable-gpu] }
-    )
-
-    Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      desired_capabilities: capabilities
-    )
+  Capybara.register_driver :selenium_chrome do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
-  Capybara.javascript_driver = :selenium_chrome_headless
-  Capybara.server = :puma # Or the server you are using
+  Capybara.javascript_driver = :selenium_chrome
+  Capybara.server = :puma
 
   # Make sure this line is present to include Capybara DSL in feature tests
   config.include Capybara::DSL, type: :feature
 
   config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+    driven_by :selenium_chrome
   end
 end
