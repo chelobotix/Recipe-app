@@ -12,7 +12,7 @@ RSpec.describe 'Recipe#Users', type: :system do
   end
 
   let(:recipe) do
-    FactoryBot.create(:recipe, name: 'Chicken', user:)
+    Recipe.create(name: "Pineapple Chicken", preparation_time: 1, cooking_time: 2, description: "dasdasdas", public: true, user: user)
   end
 
   before do
@@ -20,10 +20,16 @@ RSpec.describe 'Recipe#Users', type: :system do
     sign_in user
   end
 
-  xdescribe 'index page' do
+  describe 'index page' do
     it 'has the user created recipe' do
+      @user1 = User.create(name: 'Fede', email: 'fedefede@railsmail.com', password: '111111')
+
+      @user1.confirm
+      sign_in @user1
+
+      @recipe1 = Recipe.create(name: "Pineapple Chicken", preparation_time: 1, cooking_time: 2, description: "dasdasdas", public: true, user: @user1)
       visit recipes_path
-      expect(page).to have_content('Chicken')
+      expect(page).to have_content('Pineapple Chicken')
     end
 
     it 'has button to create a new recipe' do
@@ -32,7 +38,7 @@ RSpec.describe 'Recipe#Users', type: :system do
     end
   end
 
-  xdescribe 'Recipes#Show' do
+  describe 'Recipes#Show' do
     it 'has the Add Ingredient button' do
       visit recipe_path(recipe.id)
       expect(page).to have_content('Add ingredient')
@@ -49,7 +55,7 @@ RSpec.describe 'Recipe#Users', type: :system do
     end
   end
 
-  xdescribe 'Recipes#New' do
+  describe 'Recipes#New' do
     before do
       visit new_recipe_path
     end
@@ -62,7 +68,7 @@ RSpec.describe 'Recipe#Users', type: :system do
     end
   end
 
-  xdescribe 'Recipes#Create' do
+  describe 'Recipes#Create' do
     before do
       visit new_recipe_path
     end
@@ -80,23 +86,25 @@ RSpec.describe 'Recipe#Users', type: :system do
 
   describe 'Recipes#AddIngredient' do
     before do
-      visit recipes_add_ingredient_path(recipe.id)
-      puts "~~~~~~~DEBUGGIN LOG: #{user.id}"
-      puts "~~~~~~~DEBUGGIN LOG: #{food.user.id}"
-      puts "~~~~~~~DEBUGGIN LOG: #{recipe.user.id}"
-      puts "~~~~~~~DEBUGGIN LOG: #{recipe.id}"
+      @user1 = User.create(name: 'Fede', email: 'fedefede@railsmail.com', password: '111111')
 
+      @user1.confirm
+      sign_in @user1
+
+      @recipe1 = Recipe.create(name: "Coke Pork", preparation_time: 1, cooking_time: 2, description: "dasdasdas", public: true, user: @user1)
+
+      @food1 = Food.create(name: 'Jam', measurement_unit: 'unit', price: 12, quantity: 10, user: @user1)
+      visit recipes_add_ingredient_path(id: @recipe1.id)
     end
 
-    xit 'has the input fields' do
+    it 'has the input fields' do
       expect(page).to have_selector('select')
       expect(page).to have_selector('input')
     end
 
     it 'Add ingredient to recipe' do
-      select 'Tomato', from: 'Ingredient'
-      fill_in 'Quantity', with: 1
-      click_button 'Add ingredient'
+      fill_in 'recipe_food[quantity]', with: 2
+      click_button 'Add Ingredient'
 
       expect(page).to have_content('Ingredient was successfully added.')
     end
