@@ -5,9 +5,9 @@ class ShoppingListController < ApplicationController
     @missing_foods = []
     @total_price = 0
 
-    user.recipes.each do |recipe|
+    user.recipes.includes(recipe_foods: :food).each do |recipe|
       recipe.recipe_foods.each do |recipe_food|
-        available_food = Food.find_by(user_id: user.id, id: recipe_food.food_id)
+        available_food = recipe_food.food
         next unless available_food && available_food.quantity < recipe_food.quantity
 
         missing_quantity = recipe_food.quantity - available_food.quantity
