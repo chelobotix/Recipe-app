@@ -1,0 +1,45 @@
+<%= form_with(model: food) do |form| %>
+
+  <%= form.hidden_field :recipe_id, value: @recipe_id %>
+
+  <% if food.errors.any? %>
+    <div class="bg-red-400 text-white text-center text-sm mb-10 rounded-md">
+      <h2><%= pluralize(food.errors.count, "error") %> prohibited this food from being saved:</h2>
+
+      <ul>
+        <% food.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="py-8 ml-10">
+    <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
+
+      <div class="mb-4">
+        <%= form.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+      </div>
+
+      <div class="mb-4">
+        <%= form.label :measurement_unit, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.text_field :measurement_unit, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"%>
+      </div>
+
+      <div class="mb-4">
+        <%= form.label :price, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.text_field :price, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+      </div>
+
+      <div class="mb-4">
+        <%= form.label :quantity, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.number_field :quantity, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+      </div>
+
+      <button class="btn-primary">
+        <%= form.submit %>
+      </button>
+    </form>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<%= form_with model: @recipe_food, url: recipes_add_ingredient_post_path, method: :post do |form| %>
+  <div class="w-full max-w-sm mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
+    <%= form.select :food_select,
+                food_names,
+                {},
+                class:
+                  "w-full px-3 mt-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+    <%= form.number_field :quantity,
+                      class:
+                        "w-full px-3 mt-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500" %>
+    <%= form.submit "Add Ingredient", class: "btn-primary mt-5" %>
+  </div>
+
+<% end %>

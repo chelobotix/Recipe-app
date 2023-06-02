@@ -1,0 +1,68 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class=" flex min-h-screen items-center justify-center p-12 ml-10">
+    <form action="">
+      <div
+        class="
+          max-w-sm
+          rounded-3xl
+          bg-gradient-to-b
+          from-sky-300
+          to-purple-500
+          p-px
+        "
+      >
+        <div class="rounded-[calc(1.5rem-1px)] bg-white px-10 p-12 ">
+          <div>
+            <h1 class="text-xl font-semibold text-gray-800 ">Sign in to your account</h1>
+            <p class="text-sm tracking-wide text-gray-600">Don't have an account?
+              <%= link_to "Sign up",
+              new_registration_path(resource_name),
+              class: "text-blue-600 transition duration-200 hover:underline " %>
+              for free</p>
+          </div>
+
+          <div class="mt-8 space-y-8">
+            <div class="space-y-6">
+              <div class="field ">
+                <%= f.label :email, class: "" %><br/>
+                <%= f.email_field :email,
+                              autofocus: true,
+                              autocomplete: "email",
+                              class:
+                                "w-full bg-transparent text-gray-600  rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500 " %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password, class: "" %><br/>
+                <%= f.password_field :password,
+                                 autocomplete: "current-password",
+                                 class:
+                                   "w-full bg-transparent text-gray-600  rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500 " %>
+              </div>
+
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me, class: "" %>
+                </div>
+              <% end %>
+
+            </div>
+
+            <div class="text-green-500">
+              <%= notice %>
+            </div>
+            <div class='text-red-600'>
+              <%= alert %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Log in",
+                       class:
+                         "h-9 px-3 w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:bg-blue-700 transition duration-500 rounded-md text-white" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+<% end %>

@@ -1,0 +1,41 @@
+<div><%= notice %></div>
+<div><%= alert %></div>
+<div class="flex flex-col items-center my-10 ml-10">
+  <%= link_to "New food", new_food_path, class: "self-end mb-5 btn-primary" %>
+  <table class="w-full border-collapse">
+    <thead>
+      <tr class="bg-gray-300">
+        <th class="p-4 text-left">Food</th>
+        <th class="p-4 text-left">Quantity</th>
+        <th class="p-4 text-left">Measurement Unit</th>
+        <th class="p-4 text-left">Unit Price</th>
+        <th class="p-4 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @foods.present? %>
+        <% @foods.reverse.each do |food| %>
+          <tr class="border border-2 ">
+            <td class="p-4"><%= food.name %></td>
+            <td class="p-4"><%= food.quantity %></td>
+            <td class="p-4"><%= food.measurement_unit %></td>
+            <td class="p-4"><%= food.price %></td>
+            <td class="p-4">
+              <%= button_to "delete",
+              food_path(food.id),
+              data: {
+                confirm: "Are you sure?"
+              },
+              method: :delete,
+              class: "hover:underline" %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="p-4 text-center">No Food Found</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

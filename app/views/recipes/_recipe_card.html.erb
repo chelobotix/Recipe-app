@@ -1,0 +1,18 @@
+<div class="flip-card">
+  <div class="flip-card-inner ">
+    <div class="flip-card-front px-3">
+      <p class="font-bold text-xl"><%= "Recipe #{recipe.id}" %></p>
+      <p class="text-lg"><%= recipe.name %></p>
+    </div>
+    <div class="flip-card-back px-3">
+      <a href="<%= recipe_path(id: recipe.id) %>">
+        <p class="text-lg font-bold mb-2"><%= recipe.name %></p>
+        <p class=""><%= "#{recipe.description[0..100]}..." %></p>
+      </a>
+      <%= button_to "Remove",
+      recipe_path(id: recipe.id),
+      method: :delete,
+      class: "mt-5 font-bold text-lg hover:underline hover:text-red-600" %>
+    </div>
+  </div>
+</div>

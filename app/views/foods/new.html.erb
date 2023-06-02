@@ -1,0 +1,10 @@
+<h1 class="title">New food</h1>
+
+<%= render "form", food: @food %>
+
+<div><%= notice %></div>
+<div><%= alert %></div>
+
+<div>
+  <%= link_to "Back to foods", foods_path, class: "btn-secondary ml-10" %>
+</div>
