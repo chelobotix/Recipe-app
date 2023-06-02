@@ -85,6 +85,4 @@ test:
 #
 production:
   <<: *default
-  database: recipes_db
-  username: postgres
-  password: <%= ENV["RAILS_RECIPES_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
