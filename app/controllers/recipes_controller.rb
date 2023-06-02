@@ -53,7 +53,13 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @food.save
-        format.html { redirect_to recipe_path(id: @recipe), notice: 'Ingredient was successfully added.' }
+        format.html do
+          if @food.recipe.present?
+            redirect_to recipe_path(id: @recipe), notice: 'Ingredient was successfully added.'
+          else
+            redirect_to foods_path, notice: 'Ingredient was successfully added.'
+          end
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
       end
