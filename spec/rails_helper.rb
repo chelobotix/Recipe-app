@@ -1,5 +1,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+
+require 'capybara/rspec'
+require 'selenium/webdriver'
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -66,4 +70,27 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  # Configure Capybara for system tests
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w[headless disable-gpu] }
+    )
+
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      desired_capabilities: capabilities
+    )
+  end
+
+  Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.server = :puma # Or the server you are using
+
+  # Make sure this line is present to include Capybara DSL in feature tests
+  config.include Capybara::DSL, type: :feature
+
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome_headless
+  end
 end
