@@ -12,7 +12,8 @@ RSpec.describe 'Recipe#Users', type: :system do
   end
 
   let(:recipe) do
-    Recipe.create(name: "Pineapple Chicken", preparation_time: 1, cooking_time: 2, description: "dasdasdas", public: true, user: user)
+    Recipe.create(name: 'Pineapple Chicken', preparation_time: 1, cooking_time: 2, description: 'dasdasdas',
+                  public: true, user:)
   end
 
   before do
@@ -27,7 +28,8 @@ RSpec.describe 'Recipe#Users', type: :system do
       @user1.confirm
       sign_in @user1
 
-      @recipe1 = Recipe.create(name: "Pineapple Chicken", preparation_time: 1, cooking_time: 2, description: "dasdasdas", public: true, user: @user1)
+      @recipe1 = Recipe.create(name: 'Pineapple Chicken', preparation_time: 1, cooking_time: 2,
+                               description: 'dasdasdas', public: true, user: @user1)
       visit recipes_path
       expect(page).to have_content('Pineapple Chicken')
     end
@@ -91,7 +93,8 @@ RSpec.describe 'Recipe#Users', type: :system do
       @user1.confirm
       sign_in @user1
 
-      @recipe1 = Recipe.create(name: "Coke Pork", preparation_time: 1, cooking_time: 2, description: "dasdasdas", public: true, user: @user1)
+      @recipe1 = Recipe.create(name: 'Coke Pork', preparation_time: 1, cooking_time: 2, description: 'dasdasdas',
+                               public: true, user: @user1)
 
       @food1 = Food.create(name: 'Jam', measurement_unit: 'unit', price: 12, quantity: 10, user: @user1)
       visit recipes_add_ingredient_path(id: @recipe1.id)
@@ -109,5 +112,4 @@ RSpec.describe 'Recipe#Users', type: :system do
       expect(page).to have_content('Ingredient was successfully added.')
     end
   end
-
 end

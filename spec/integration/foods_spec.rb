@@ -28,7 +28,9 @@ RSpec.describe 'Foods', type: :system do
           expect(page).to have_content(food.price.to_s)
         end
       end
+    end
 
+    context 'when user is logged in but has no foods' do
       it 'it can create a new food' do
         user = FactoryBot.create(:user)
         user.confirm
