@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'cancan'
 
 RSpec.describe FoodsController, type: :controller do
   describe 'GET #index' do
@@ -27,10 +28,11 @@ RSpec.describe FoodsController, type: :controller do
       sign_in user
 
       food_params = { name: 'Apple', quantity: 10, measurement_unit: 'pieces', price: 2.99, user_id: user.id }
+      all_food = Food.all.size
 
       post :create, params: { food: food_params }
 
-      expect(Food.count).to eq(1)
+      expect(Food.count).to eq(all_food + 1)
       food = Food.last
       expect(food.name).to eq('Apple')
       expect(food.quantity).to eq(10)
