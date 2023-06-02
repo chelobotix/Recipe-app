@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'cancan'
 
 RSpec.describe 'ShoppingLists', type: :request do
   around(:each) do |example|

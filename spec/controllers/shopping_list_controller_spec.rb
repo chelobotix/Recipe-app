@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'cancan'
 
 describe ShoppingListController, type: :controller do
   describe 'GET #Index' do

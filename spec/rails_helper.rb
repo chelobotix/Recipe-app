@@ -1,8 +1,8 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 
-require 'capybara/rspec'
-require 'selenium/webdriver'
+# require 'capybara/rspec'
+# require 'selenium/webdriver'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -67,24 +67,27 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  # Include Devise test helpers
+  # # Include Devise test helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
 
-  # Configure Capybara for system tests
-  Capybara.register_driver :selenium_chrome do |app|
-    Capybara::Selenium::Driver.new(app, browser: :chrome)
-  end
 
-  Capybara.javascript_driver = :selenium_chrome
-  Capybara.server = :puma
 
-  # Make sure this line is present to include Capybara DSL in feature tests
-  config.include Capybara::DSL, type: :feature
+  # # Configure Capybara for system tests
+  # Capybara.register_driver :selenium_chrome do |app|
+  #   Capybara::Selenium::Driver.new(app, browser: :chrome)
+  # end
 
-  config.before(:each, type: :system) do
-    driven_by :selenium_chrome
-  end
+  # Capybara.javascript_driver = :selenium_chrome
+  # Capybara.server = :puma
+
+  # # Make sure this line is present to include Capybara DSL in feature tests
+  # config.include Capybara::DSL, type: :feature
+
+  # config.before(:each, type: :system) do
+  #   driven_by :selenium_chrome
+  # end
 end

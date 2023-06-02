@@ -1,6 +1,7 @@
 # require 'rails_helper'
 # require 'capybara/rspec'
 
+
 # RSpec.describe 'Users', type: :feature do
 #   around(:each) do |example|
 #     ActiveRecord::Base.connection.transaction do
@@ -34,25 +35,27 @@ require 'cancan'
 
 RSpec.describe 'Index users page', type: :system do
   before do
-    @user = User.create(name: Faker::Name.first_name,
-                        email: Faker::Internet.email,
-                        password: Faker::Internet.password,
-                        confirmed_at: "2023-05-29 22:12:54.819467" )
+    @user = User.find(1)
+    sign_in @user
+    # @user = User.create(name: Faker::Name.first_name,
+    #                     email: Faker::Internet.email,
+    #                     password: Faker::Internet.password,
+    #                     confirmed_at: "2023-05-29 22:12:54.819467" )
 
-    @recipe = Recipe.create(name: Faker::Food.dish,
+    @recipe = Recipe.create(name: 'Pork',
       preparation_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + 10),
       cooking_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + 10),
       description: Faker::Lorem.paragraph,
       public: Faker::Boolean.boolean,
       user: @user)
 
-      visit recipes_path
+    #   visit recipes_path
   end
 
   describe 'index page' do
     it 'should show the username of all other users' do
       visit recipes_path
-      expect(page).to have_content('Coke Chicken')
+      expect(page).to have_content('Pork')
     end
   end
 end
